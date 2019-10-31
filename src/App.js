@@ -6,7 +6,7 @@ import AuthComponent from './components/AuthComponent';
 
 class App extends React.Component {
   render() {
-  return <div className="App">
+  return ( <div className="App">
           <header>
             {/* inner double container */}
             <div className='logo'>
@@ -33,6 +33,7 @@ class App extends React.Component {
             }}/>
           </Switch>
          </div>
+    )
   }
 }
 

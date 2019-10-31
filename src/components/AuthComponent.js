@@ -37,7 +37,8 @@ class AuthComponent extends Component {
 
     render() {
         const { email, username, password, register } = this.state;
-        return <div className="auth-container">
+        return (
+            <div className="auth-container">
                 <form onSubmit={(e) => {
                     // prevent default to stop form from refreshing
                     e.preventDefault()
@@ -90,6 +91,7 @@ class AuthComponent extends Component {
                     Login
                 </button>
                 </div>
+        )
     }
 }
 
