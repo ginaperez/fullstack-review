@@ -1,4 +1,4 @@
-# Body Parts Ebay
+# Ecommerce
 
 ## frontend (React)
 
@@ -66,7 +66,7 @@ CREATE TABLE inventory (
     part_id SERIAL PRIMARY KEY,
     part_name VARCHAR(64) NOT NULL,
     price INTEGER NOT NULL,
-    quality TEXT NOT NULL
+    quality TEXT NOT NULL,
     image TEXT NOT NULL
 )
 ```
