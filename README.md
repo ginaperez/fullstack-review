@@ -2,7 +2,40 @@
 
 ## frontend (React)
 
+## dependencies
+
+- axios
+- redux
+- react-router-dom
+- react-redux
+- http-proxy-middlware
+- redux-promise-middleware
+- node-sass
+
+## routes
+
+- login/register => '/' => AuthComponent.js
+- Store => "/products => AvailableProducts.js
+- Profile => "/profile" => Profile.js
+
+### file-structure
+
+- src/
+    - components
+        - AuthComponent.js
+        - AvailableProducts.js
+        - Profile.js
+    - App.js
+    - index.js
+    - index.css => reset.css
+    - setupProxy.js
+    - ducks/
+        - store.js
+        - reducer.js
+
 ## backend (Express)
+
+## dependencies
 
 - express
 - massive

@@ -30,6 +30,14 @@ massive(CONNECTION_STRING).then(db => {
 app.post('/auth/register', register);
 app.get('/auth/user_session', userSession);
 app.delete('/auth/logout', logout);
+app.post('/auth/login', login);
+
+app.get('/api/inventory', (req, res, next) => {
+    const db = req.app.get('db');
+    db.query('SELECT * FROM inventory').then(inventory => {
+        res.status(200).send(inventory)
+    })
+})
 
 // app.get('/api/test', (req, res, next) => {
 //     const db = req.app.get('db');
