@@ -5,6 +5,7 @@ import { setUser } from './ducks/reducer';
 import logo from './logo.png'
 import './App.css';
 import AuthComponent from './components/AuthComponent';
+import Profile from './components/Profile';
 import Axios from 'axios';
 
 class App extends React.Component {
@@ -19,31 +20,53 @@ class App extends React.Component {
             </div>
             {/* nav container */}
             <nav>
-            <NavLink activeClassName="active" exact to="/">Home</NavLink>
-            <NavLink activeClassName="active" to="/store">Store</NavLink>
-            <NavLink activeClassName="active" to="/profile">Profile</NavLink>
-            {this.props.user && <button onClick={() => {
+              {this.props.user || (
+            <NavLink activeClassName="active" exact to="/">
+              Login
+            </NavLink>
+            )}
+              {this.props.user && (
+            <div>
+            <NavLink activeClassName="active" 
+            to="/store">
+              Store
+            </NavLink>
+            <NavLink activeClassName="active" 
+            to="/profile">
+              Profile
+            </NavLink>
+            </div>
+            )}
+            {this.props.user && (
+            <button 
+              onClick={() => {
               Axios.delete('/auth/logout').then(() => {
                 this.props.setUser(null);
-              })
-            }}>
-              Logout</button>}
+              });
+            }}
+            >
+            Logout</button>
+            )}
             </nav>
           </header>
           <Switch>
             <Route exact path="/" component={AuthComponent} />
+            {this.props.user && (
+              <div>
             <Route exact path="/store" render={() => {
               return <div>Store</div> 
-            }}/>
-            <Route exact path="/profile" render={() => {
-              return <div>Profile</div> 
-            }}/>
+            }}
+            />
+            <Route exact path="/profile" component={Profile} />
             <Route exact path="*" render={() => {
-              return <div>????</div> 
-            }}/>
+              return <div>Get Out!</div> 
+            }}
+            />
+            </div>
+            )}
           </Switch>
          </div>
-    )
+    );
   }
 }
 
@@ -53,7 +76,8 @@ function mapReduxStateToProps(reduxState) {
 
 const mapDispatchToProps = {
   setUser
-}
+};
+
 const invokedConnect = connect(mapReduxStateToProps, mapDispatchToProps)
 
-export default withRouter(App);
+export default invokedConnect(withRouter(App));

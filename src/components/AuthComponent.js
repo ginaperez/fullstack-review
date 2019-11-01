@@ -36,13 +36,22 @@ class AuthComponent extends Component {
     }
 
     render() {
+        // destructured state values
         const { email, username, password, register } = this.state;
-        return (
+        return this.props.user ? (
+            <Redirect to="/profile" />
+        ) : (
             <div className="auth-container">
-                <form onSubmit={(e) => {
+                <form onSubmit={e => {
                     // prevent default to stop form from refreshing
-                    e.preventDefault()
-                }}>
+                    e.preventDefault();
+                    if(register) {
+                        this.register();
+                    } else {
+                        this.login();
+                    }
+                }}
+                >
                     {/* username input */}
                     {register && (
                     <div className='input-container'>
@@ -60,7 +69,7 @@ class AuthComponent extends Component {
                         <input 
                         type="email"
                         value={email} 
-                        onChange={(e) => this.setState({
+                        onChange={e => this.setState({
                             email: e.target.value 
                         }) 
                     }
@@ -72,25 +81,29 @@ class AuthComponent extends Component {
                         <input 
                         type="password"
                         value={password} 
-                        onChange={(e) => this.setState({
+                        onChange={e => this.setState({
                             password: e.target.value 
                         }) 
                     }
                     />
                     </div>
-                    <button>Register</button>
+                    <button>{register ? "Register" : "Login"}</button>
                 </form>
+                {!register && (
                 <button onClick={() => this.setState({
                     register: true
                 })}>
-                    Register
+                    Go To Register
                 </button>
+                )}
+                {register && (
                 <button onClick={() => this.setState({
                     register: false
                 })}>
-                    Login
+                    Go To Login
                 </button>
-                </div>
+                )}
+            </div>
         )
     }
 }
